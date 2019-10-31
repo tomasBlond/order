@@ -1,3 +1,5 @@
+package costumer;
+
 public class Costumer {
     private String firstName;
     private String lastName;
