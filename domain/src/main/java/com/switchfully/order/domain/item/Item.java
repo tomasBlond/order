@@ -21,6 +21,14 @@ public class Item {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public double getPrice() {
         return price;
     }
