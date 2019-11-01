@@ -1,8 +1,10 @@
-package item;
+package com.switchfully.order.domain.item;
+
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class ItemRepository {
     private List<Item> itemRepository = new ArrayList<>();
 

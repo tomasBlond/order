@@ -1,4 +1,4 @@
-package costumer;
+package com.switchfully.order.domain.costumer;
 
 public class Costumer {
     private String firstName;
