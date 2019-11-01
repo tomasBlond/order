@@ -1,6 +1,7 @@
 package com.switchfully.order.api;
 
 import com.switchfully.order.api.costumer.dto.CostumerDto;
+import com.switchfully.order.api.costumer.dto.CreateCostumerDto;
 import com.switchfully.order.api.item.dto.CreateItemDto;
 import com.switchfully.order.api.item.dto.ItemDto;
 import com.switchfully.order.domain.costumer.Costumer;
@@ -20,13 +21,13 @@ public class DtoMapper {
         return myDto;
     }
 
-    public Costumer createCostumerDtoToCostumer(Costumer costumer){
+    public Costumer createCostumerDtoToCostumer(CreateCostumerDto createCostumerDto){
         return new Costumer(
-                costumer.getFirstName(),
-                costumer.getLastName(),
-                costumer.getEmail(),
-                costumer.getAddress(),
-                costumer.getPhoneNumber());
+                createCostumerDto.getFirstName(),
+                createCostumerDto.getLastName(),
+                createCostumerDto.getEmail(),
+                createCostumerDto.getAddress(),
+                createCostumerDto.getPhoneNumber());
     }
 
     public Item createItemDtoToItem(CreateItemDto createItemDto) {

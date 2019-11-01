@@ -7,7 +7,7 @@ public class Costumer {
     private String firstName;
     private String lastName;
     private String email;
-    private String Address;
+    private String address;
     private int phoneNumber;
 
     public Costumer(String firstName, String lastName, String email, String address, int phoneNumber) {
@@ -15,7 +15,7 @@ public class Costumer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        Address = address;
+        this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
@@ -36,7 +36,7 @@ public class Costumer {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public int getPhoneNumber() {

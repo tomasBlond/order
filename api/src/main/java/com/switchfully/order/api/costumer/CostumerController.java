@@ -3,7 +3,6 @@ package com.switchfully.order.api.costumer;
 import com.switchfully.order.api.DtoMapper;
 import com.switchfully.order.api.costumer.dto.CostumerDto;
 import com.switchfully.order.api.costumer.dto.CreateCostumerDto;
-import com.switchfully.order.domain.costumer.Costumer;
 import com.switchfully.order.service.CostumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,14 +23,9 @@ public class CostumerController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public CostumerDto addNewCostumer(@RequestBody CreateCostumerDto createCostumerDto){
-        return dtoMapper.costumerToDto(
-                costumerService.createCostumer(
-                        new Costumer(
-                createCostumerDto.getFirstName(),
-                createCostumerDto.getLastName(),
-                createCostumerDto.getEmail(),
-                createCostumerDto.getAddress(),
-                createCostumerDto.getPhoneNumber())));
+        var costumer = dtoMapper.createCostumerDtoToCostumer(createCostumerDto);
+        costumerService.createCostumer(costumer);
+        return dtoMapper.costumerToDto(costumer);
     }
 
 }

@@ -6,12 +6,10 @@ import com.switchfully.order.api.item.dto.ItemDto;
 import com.switchfully.order.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/items")
 public class ItemController {
     private ItemService itemService;
     private DtoMapper dtoMapper;
