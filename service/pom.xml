@@ -22,7 +22,6 @@
         <dependency>
             <groupId>com.switchfully</groupId>
             <artifactId>domain</artifactId>
-            <version>1,0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

@@ -13,6 +13,7 @@ public class DtoMapper {
 
     public CostumerDto costumerToDto(Costumer costumer){
         CostumerDto myDto = new CostumerDto();
+        myDto.setId(costumer.getId());
         myDto.setAddress(costumer.getAddress());
         myDto.setEmail(costumer.getEmail());
         myDto.setFirstName(costumer.getFirstName());

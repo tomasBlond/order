@@ -3,6 +3,7 @@ package com.switchfully.order.domain.order;
 import com.switchfully.order.domain.item.Item;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class ItemGroup {
     private Item item;
@@ -10,9 +11,9 @@ public class ItemGroup {
     private int amount;
     private LocalDate shippingDate;
 
-    public ItemGroup(Item item, int amount, LocalDate shippingDate) {
+    public ItemGroup(Item item, int amount) {
         this.item = item;
-        this.id = item.getId();
+        this.id = UUID.randomUUID().toString();
         this.amount = amount;
         if (item.getStockAmount() > amount){
             this.shippingDate = LocalDate.now().plusDays(1);

@@ -1,11 +1,16 @@
 package com.switchfully.order.api.costumer.dto;
 
 public class CostumerDto {
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
     private String Address;
     private int phoneNumber;
+
+    public String getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -49,6 +54,11 @@ public class CostumerDto {
 
     public CostumerDto setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public CostumerDto setId(String id) {
+        this.id = id;
         return this;
     }
 }

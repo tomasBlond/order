@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(path = "/costumers")
 public class CostumerController {
@@ -28,4 +31,19 @@ public class CostumerController {
         return dtoMapper.costumerToDto(costumer);
     }
 
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CostumerDto> getAllCostumers(){
+        return costumerService.getAll().stream()
+                .map(costumer -> dtoMapper.costumerToDto(costumer))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/{id}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public CostumerDto getCostumer(@PathVariable String id){
+        return costumerService.getAll().stream()
+                .filter(costumer -> costumer.getId().equals(id))
+                .findFirst().map(costumer -> dtoMapper.costumerToDto(costumer)).get();
+    }
 }
