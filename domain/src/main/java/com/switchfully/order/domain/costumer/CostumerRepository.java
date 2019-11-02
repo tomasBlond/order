@@ -1,11 +1,9 @@
 package com.switchfully.order.domain.costumer;
 
-
-
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class CostumerRepository {
     private List<Costumer> costumerRepository = new ArrayList<>();

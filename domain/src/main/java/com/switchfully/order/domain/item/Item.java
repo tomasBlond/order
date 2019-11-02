@@ -2,7 +2,8 @@ package com.switchfully.order.domain.item;
 
 import java.util.UUID;
 
-public class Item {
+public class
+Item {
     private String id;
     private String name;
     private String description;
