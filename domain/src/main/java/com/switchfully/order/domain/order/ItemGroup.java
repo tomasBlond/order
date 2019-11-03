@@ -29,4 +29,16 @@ public class ItemGroup {
     public Item getItem() {
         return item;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public LocalDate getShippingDate() {
+        return shippingDate;
+    }
 }

@@ -9,17 +9,28 @@ import java.util.List;
 public class Order {
     private Costumer costumer;
     private double price;
-    List<ItemGroup> itemGroups;
+    private ItemGroupRepository itemGroupRepository;
 
     public Order(Costumer costumer) {
         this.costumer = costumer;
         this.price = 0;
-        this.itemGroups = new ArrayList<>();
     }
 
-    public ItemGroup saveOrderItem(ItemGroup itemGroup){
-        itemGroups.add(itemGroup);
-        this.price = price + itemGroup.calculatePrice();
-        return itemGroup;
+    public double calculateOrderPrice(){
+        this.price = itemGroupRepository.getItemGroups().stream()
+                .mapToDouble(ItemGroup::calculatePrice).sum();
+        return price;
+    }
+
+    public Costumer getCostumer() {
+        return costumer;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public ItemGroupRepository getItemGroupRepository() {
+        return itemGroupRepository;
     }
 }
