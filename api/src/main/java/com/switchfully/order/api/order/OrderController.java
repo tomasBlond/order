@@ -4,6 +4,8 @@ import com.switchfully.order.api.DtoMapper;
 import com.switchfully.order.api.order.orderDto.CreateOrderDto;
 import com.switchfully.order.api.order.orderDto.OrderDto;
 import com.switchfully.order.domain.order.Order;
+import com.switchfully.order.service.ItemGroupService;
+import com.switchfully.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/orders")
 public class OrderController {
-    private Order orders;
+    private ItemGroupService itemGroupService;
+    private OrderService orderService;
     private DtoMapper dtoMapper;
 
     @Autowired
-    public OrderController(Order orders, DtoMapper dtoMapper) {
-        this.orders = orders;
+    public OrderController(ItemGroupService itemGroupService, OrderService orderService, DtoMapper dtoMapper) {
+        this.itemGroupService = itemGroupService;
+        this.orderService = orderService;
         this.dtoMapper = dtoMapper;
     }
 

@@ -71,13 +71,13 @@ public class DtoMapper {
 
     public Order createOrderDtoToOrder(CreateOrderDto createOrderDto) {
         return new Order(
-                createOrderDto.getCostumer()
+                createOrderDto.getCostumerId()
         );
     }
 
     public OrderDto orderToOrderDto(Order order){
         OrderDto myDto = new OrderDto();
-        myDto.setCostumer(order.getCostumer());
+        myDto.setCostumerId(order.getCostumerId());
         myDto.setItemGroupRepository(order.getItemGroupRepository());
         myDto.setPrice(order.getPrice());
         return myDto;

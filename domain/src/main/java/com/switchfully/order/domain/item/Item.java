@@ -4,22 +4,22 @@ import java.util.UUID;
 
 public class
 Item {
-    private String id;
+    private String itemId;
     private String name;
     private String description;
     private double price;
     private int stockAmount;
 
     public Item(String name, String description, double price, int stockAmount) {
-        this.id = UUID.randomUUID().toString();
+        this.itemId = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockAmount = stockAmount;
     }
 
-    public String getId() {
-        return id;
+    public String getItemId() {
+        return itemId;
     }
 
     public String getName() {

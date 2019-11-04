@@ -1,18 +1,12 @@
 package com.switchfully.order.domain.order;
 
-import com.switchfully.order.domain.costumer.Costumer;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Order {
-    private Costumer costumer;
+    private String costumerId;
     private double price;
     private ItemGroupRepository itemGroupRepository;
 
-    public Order(Costumer costumer) {
-        this.costumer = costumer;
+    public Order(String costumerId) {
+        this.costumerId = costumerId;
         this.price = 0;
     }
 
@@ -22,8 +16,8 @@ public class Order {
         return price;
     }
 
-    public Costumer getCostumer() {
-        return costumer;
+    public String getCostumerId() {
+        return costumerId;
     }
 
     public double getPrice() {

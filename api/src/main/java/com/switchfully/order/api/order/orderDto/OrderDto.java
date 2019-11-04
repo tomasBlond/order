@@ -4,12 +4,12 @@ import com.switchfully.order.domain.costumer.Costumer;
 import com.switchfully.order.domain.order.ItemGroupRepository;
 
 public class OrderDto {
-    private Costumer costumer;
+    private String costumerId;
     private double price;
     private ItemGroupRepository itemGroupRepository;
 
-    public Costumer getCostumer() {
-        return costumer;
+    public String getCostumerId() {
+        return costumerId;
     }
 
     public double getPrice() {
@@ -20,8 +20,8 @@ public class OrderDto {
         return itemGroupRepository;
     }
 
-    public OrderDto setCostumer(Costumer costumer) {
-        this.costumer = costumer;
+    public OrderDto setCostumerId(String costumerId) {
+        this.costumerId = costumerId;
         return this;
     }
 
