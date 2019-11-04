@@ -7,8 +7,13 @@ public class Order {
 
     public Order(String costumerId) {
         this.costumerId = costumerId;
+        this.price = 0;
+    }
+
+    public double calculateOrderPrice(){
         this.price = itemGroupRepository.getItemGroups().stream()
                 .mapToDouble(ItemGroup::calculatePrice).sum();
+        return price;
     }
 
     public String getCostumerId() {
