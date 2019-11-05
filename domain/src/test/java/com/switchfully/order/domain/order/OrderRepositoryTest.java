@@ -3,14 +3,12 @@ package com.switchfully.order.domain.order;
 import com.switchfully.order.domain.costumer.Costumer;
 import com.switchfully.order.domain.item.Item;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class OrderRepositoryTest {
     private OrderRepository orderRepository = new OrderRepository();

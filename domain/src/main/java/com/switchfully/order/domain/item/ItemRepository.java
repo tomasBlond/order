@@ -16,7 +16,14 @@ public class ItemRepository {
     }
 
     public Item getItemById(String itemId) {
-       return itemRepository.stream().filter(item -> item.getItemId().equals(itemId)).findFirst().get();
+        if (itemIsIn(itemId)){
+            return itemRepository.stream().filter(item -> item.getItemId().equals(itemId)).findFirst().get();
+        }
+        throw new IllegalArgumentException("Item with id " + itemId + " not found");
+    }
+
+    private boolean itemIsIn(String itemId) {
+        return itemRepository.stream().anyMatch(item -> item.getItemId().equals(itemId));
     }
 
     private boolean isIn(Item item) {

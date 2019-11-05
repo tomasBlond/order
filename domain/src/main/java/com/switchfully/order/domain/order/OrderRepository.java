@@ -2,7 +2,6 @@ package com.switchfully.order.domain.order;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +21,16 @@ public class OrderRepository {
     }
 
     public List<Order> getOrdersFromCostumer(String costumerId){
-        if (orderRepository.values().stream()
-                .anyMatch(order -> order.getCostumerId().equals(costumerId))){
+        if (costumerHasOrders(costumerId)){
             return orderRepository.values().stream()
                     .filter(order -> order.getCostumerId().equals(costumerId))
                     .collect(Collectors.toList());
         }
         throw new IllegalArgumentException("Costumer has no orders");
+    }
+
+    private boolean costumerHasOrders(String costumerId) {
+        return orderRepository.values().stream()
+                .anyMatch(order -> order.getCostumerId().equals(costumerId));
     }
 }
