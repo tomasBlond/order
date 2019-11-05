@@ -1,6 +1,7 @@
-package com.switchfully.order.domain.order;
+package com.switchfully.order.domain.item;
 
 import com.switchfully.order.domain.item.Item;
+import com.switchfully.order.domain.order.ItemGroup;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

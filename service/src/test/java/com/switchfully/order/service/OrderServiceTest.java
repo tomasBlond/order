@@ -78,4 +78,17 @@ class OrderServiceTest {
         Assertions.assertEquals(LocalDate.now().plusDays(7), items.get(1).getShippingDate());
     }
 
+    @Test
+    void calculateTotalSpent_returnTotalSpentByCostumer(){
+        Order myOrder = new Order(costumer.getId(), items);
+        Order myOrder2 = new Order(costumer.getId(), items);
+        orderService.placeOrder(myOrder);
+        orderService.placeOrder(myOrder2);
+
+        Assertions.assertEquals(260,
+                orderService.calculateTotalSpent(
+                        orderService.getOrderRepository()
+                                .getOrdersFromCostumer(costumer.getId())));
+    }
+
 }

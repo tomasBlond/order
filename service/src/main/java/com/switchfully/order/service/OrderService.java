@@ -72,20 +72,17 @@ public class OrderService {
         }
         return shippingDate;
     }
-
+    public double calculateTotalSpent(List<Order> orderList) {
+        return orderList.stream().mapToDouble(Order::getPrice).sum();
+    }
+    public List<Order> getReport(String costumerId) {
+        return orderRepository.getOrdersFromCostumer(costumerId);
+    }
+    OrderRepository getOrderRepository() {
+        return orderRepository;
+    }
     public ItemRepository getItemRepository() {
         return itemRepository;
     }
 
-    OrderRepository getOrderRepository() {
-        return orderRepository;
-    }
-
-    public List<Order> getReport(String costumerId) {
-        return orderRepository.getOrdersFromCostumer(costumerId);
-    }
-
-    public double calculateTotalSpent(List<Order> orderList) {
-        return orderList.stream().mapToDouble(Order::getPrice).sum();
-    }
 }
