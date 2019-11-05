@@ -28,8 +28,11 @@ public class OrderController {
         return dtoMapper.orderToOrderDto(order);
     }
 
-//    @GetMapping(produces = "application/json")
-//    @ResponseStatus(HttpStatus.OK)
-//    public OrderReportDto
-    //TODO
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderReportDto getReport(@RequestBody String costumerId){
+        list<Order> orderService.getOrderRepository().getOrderFromCostumer(costumerId);
+        return dtoMapper.orderReportToDto(report);
+    }
+
 }

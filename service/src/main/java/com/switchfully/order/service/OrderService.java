@@ -79,4 +79,7 @@ public class OrderService {
     public OrderRepository getOrderRepository() {
         return orderRepository;
     }
+
+    public OrderReport getReport(String costumerId) {
+    }
 }
