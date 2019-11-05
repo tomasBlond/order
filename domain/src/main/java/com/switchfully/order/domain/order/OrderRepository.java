@@ -13,4 +13,8 @@ public class OrderRepository {
         orderRepository.put(order.getCostumerId(), order);
         return order;
     }
+
+    public Map<String, Order> getOrderRepository() {
+        return orderRepository;
+    }
 }

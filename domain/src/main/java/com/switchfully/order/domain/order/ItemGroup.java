@@ -1,10 +1,7 @@
 package com.switchfully.order.domain.order;
 
-import com.switchfully.order.domain.item.Item;
-import com.switchfully.order.domain.item.ItemRepository;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class ItemGroup {
     private String itemId;

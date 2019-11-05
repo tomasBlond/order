@@ -1,7 +1,5 @@
 package com.switchfully.order.domain.item;
 
-import java.util.UUID;
-
 public class Item {
     private String itemId;
     private String name;
@@ -35,5 +33,9 @@ public class Item {
 
     public int getStockAmount() {
         return stockAmount;
+    }
+
+    public void setStockAmount(int stockAmount) {
+        this.stockAmount = stockAmount;
     }
 }
