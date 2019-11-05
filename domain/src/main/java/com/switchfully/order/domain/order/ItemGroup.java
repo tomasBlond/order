@@ -10,6 +10,9 @@ public class ItemGroup {
     private double price;
 
     public ItemGroup(String itemId, int amount) {
+        if (amount < 1){
+            throw new IllegalArgumentException("To place an order, amount must be bigger than 1");
+        }
         this.itemId = itemId;
         this.amount = amount;
     }

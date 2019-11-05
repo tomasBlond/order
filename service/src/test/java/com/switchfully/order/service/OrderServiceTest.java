@@ -23,7 +23,6 @@ class OrderServiceTest {
     private Item honing;
     private List<ItemGroup> items = new ArrayList<>();
 
-
     @BeforeEach
     void setup(){
         milk = new Item("milk", "milk is nice", 10, 5);

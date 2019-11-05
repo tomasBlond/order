@@ -11,13 +11,12 @@ public class ItemRepository {
     public void save(Item item) {
         if (isIn(item)){
             throw new IllegalArgumentException("Item is already in");
-        } else {
-           itemRepository.add(item);
         }
+        itemRepository.add(item);
     }
 
     public Item getItemById(String itemId) {
-        return itemRepository.stream().filter(item -> item.getItemId().equals(itemId)).findFirst().get();
+       return itemRepository.stream().filter(item -> item.getItemId().equals(itemId)).findFirst().get();
     }
 
     private boolean isIn(Item item) {
