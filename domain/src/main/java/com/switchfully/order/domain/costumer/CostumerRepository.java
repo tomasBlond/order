@@ -18,7 +18,6 @@ public class CostumerRepository {
         }
         costumerRepository.add(costumer);
     }
-
     private boolean isIn(Costumer costumer) {
         return costumerRepository.contains(costumer);
     }

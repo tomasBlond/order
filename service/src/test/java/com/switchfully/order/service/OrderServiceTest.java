@@ -22,6 +22,7 @@ class OrderServiceTest {
     private Item milk;
     private Item honing;
     private List<ItemGroup> items = new ArrayList<>();
+    private Order myOrder;
 
     @BeforeEach
     void setup(){
@@ -33,21 +34,18 @@ class OrderServiceTest {
         orderService = new OrderService(new ItemRepository(), new OrderRepository());
         orderService.createItem(milk);
         orderService.createItem(honing);
+        myOrder = new Order(costumer.getId(), items);
     }
 
     @Test
     void placeOrder_orderIsSavedInRepository(){
-        Order myOrder = new Order(costumer.getId(), items);
         orderService.placeOrder(myOrder);
-
         Assertions.assertTrue(orderService.getOrderRepository().getOrderRepository().containsValue(myOrder));
     }
 
     @Test
     void whenPlaceOrder_thenItemStockChangewithAmountOrdered(){
-        Order myOrder = new Order(costumer.getId(), items);
         orderService.placeOrder(myOrder);
-
         Assertions.assertEquals(2, milk.getStockAmount());
         Assertions.assertEquals(-2, honing.getStockAmount());
         Assertions.assertNotEquals(1, milk.getStockAmount());
@@ -56,39 +54,30 @@ class OrderServiceTest {
 
     @Test
     void placeOrder_totalPriceIsCalculated(){
-        Order myOrder = new Order(costumer.getId(), items);
-
         Assertions.assertEquals(130, orderService.placeOrder(myOrder).getPrice());
     }
 
 
     @Test
     void placeOrder_whenStockIsBeggerThanOrderedAmount_thenDeliveryTimeIsNextDay(){
-        Order myOrder = new Order(costumer.getId(), items);
         orderService.placeOrder(myOrder);
         Assertions.assertEquals(LocalDate.now().plusDays(1), items.get(0).getShippingDate());
     }
 
-
     @Test
     void placeOrder_whenStockIsSmallerThanOrderedAmount_thenDeliveryTimeIsNextWeek(){
-        Order myOrder = new Order(costumer.getId(), items);
         orderService.placeOrder(myOrder);
-
         Assertions.assertEquals(LocalDate.now().plusDays(7), items.get(1).getShippingDate());
     }
 
     @Test
     void calculateTotalSpent_returnTotalSpentByCostumer(){
-        Order myOrder = new Order(costumer.getId(), items);
         Order myOrder2 = new Order(costumer.getId(), items);
         orderService.placeOrder(myOrder);
         orderService.placeOrder(myOrder2);
-
         Assertions.assertEquals(260,
                 orderService.calculateTotalSpent(
                         orderService.getOrderRepository()
                                 .getOrdersFromCostumer(costumer.getId())));
     }
-
 }

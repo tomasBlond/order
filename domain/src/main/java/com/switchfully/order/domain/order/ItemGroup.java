@@ -1,6 +1,5 @@
 package com.switchfully.order.domain.order;
 
-
 import java.time.LocalDate;
 
 public class ItemGroup {
@@ -28,12 +27,15 @@ public class ItemGroup {
     public double getPrice() {
         return price;
     }
+
     public String getItemId() {
         return itemId;
     }
+
     public int getAmount() {
         return amount;
     }
+
     public LocalDate getShippingDate() {
         return shippingDate;
     }

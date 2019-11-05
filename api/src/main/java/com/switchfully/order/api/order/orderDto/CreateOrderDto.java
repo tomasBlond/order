@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CreateOrderDto {
     private String costumerId;
+
     private List<CreateItemGroupDto> createItemGroups = new ArrayList<>();
 
     public String getCostumerId() {

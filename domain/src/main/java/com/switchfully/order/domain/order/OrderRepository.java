@@ -22,8 +22,12 @@ public class OrderRepository {
     }
 
     public List<Order> getOrdersFromCostumer(String costumerId){
-        return orderRepository.values().stream()
-                .filter(order -> order.getCostumerId().equals(costumerId))
-                .collect(Collectors.toList());
+        if (orderRepository.values().stream()
+                .anyMatch(order -> order.getCostumerId().equals(costumerId))){
+            return orderRepository.values().stream()
+                    .filter(order -> order.getCostumerId().equals(costumerId))
+                    .collect(Collectors.toList());
+        }
+        throw new IllegalArgumentException("Costumer has no orders");
     }
 }

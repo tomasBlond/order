@@ -42,8 +42,7 @@ public class CostumerController {
     @GetMapping(path = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public CostumerDto getCostumer(@PathVariable String id){
-        return costumerService.getAll().stream()
-                .filter(costumer -> costumer.getId().equals(id))
-                .findFirst().map(costumer -> dtoMapper.costumerToDto(costumer)).get();
+        var costumer = costumerService.getCostumerById(id);
+        return dtoMapper.costumerToDto(costumer);
     }
 }

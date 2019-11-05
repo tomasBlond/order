@@ -19,8 +19,17 @@ public class CostumerService {
         return costumerRepository.getAllCostumers();
     }
 
-    public Costumer createCostumer(Costumer costumer){
+    public void createCostumer(Costumer costumer){
         costumerRepository.save(costumer);
-        return costumer;
+    }
+
+    public Costumer getCostumerById(String id){
+        if (costumerRepository.getAllCostumers()
+                .stream().anyMatch(costumer -> costumer.getId().equals(id))) {
+            return costumerRepository.getAllCostumers()
+             .stream().filter(costumer -> costumer.getId().equals(id))
+            .findAny().get();
+        }
+        throw new  IllegalArgumentException("Customer with that Id doesn't Exist");
     }
 }
