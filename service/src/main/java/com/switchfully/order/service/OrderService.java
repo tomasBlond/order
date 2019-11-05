@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class OrderService {
@@ -35,12 +36,12 @@ public class OrderService {
         return order;
     }
 
-    public void setStockAmount(String itemId, int amount){
+    private void setStockAmount(String itemId, int amount){
         itemRepository.getItemById(itemId)
                 .setStockAmount(itemRepository.getItemById(itemId).getStockAmount() - amount);
     }
 
-    public void changeStockAfterOrder(Order order){
+    private void changeStockAfterOrder(Order order){
         order.getItemGroups().forEach(itemGroup -> setStockAmount(itemGroup.getItemId(), itemGroup.getAmount()));
     }
 
@@ -56,11 +57,11 @@ public class OrderService {
                         calculatePrice(itemGroup.getItemId(), itemGroup.getAmount())));
     }
 
-    public double calculatePrice(String itemId, int amount){
+    private double calculatePrice(String itemId, int amount){
         return itemRepository.getItemById(itemId).getPrice() * amount;
     }
 
-    public LocalDate setDate(String itemId, int amount){
+    private LocalDate setDate(String itemId, int amount){
         LocalDate shippingDate;
         int shippingDaysIfInStock = 1;
         int shippingDaysIfNOTInStock = 7;
@@ -76,10 +77,15 @@ public class OrderService {
         return itemRepository;
     }
 
-    public OrderRepository getOrderRepository() {
+    OrderRepository getOrderRepository() {
         return orderRepository;
     }
 
-    public OrderReport getReport(String costumerId) {
+    public List<Order> getReport(String costumerId) {
+        return orderRepository.getOrdersFromCostumer(costumerId);
+    }
+
+    public double calculateTotalSpent(List<Order> orderList) {
+        return orderList.stream().mapToDouble(Order::getPrice).sum();
     }
 }

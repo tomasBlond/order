@@ -4,6 +4,7 @@ import com.switchfully.order.api.costumer.dto.CostumerDto;
 import com.switchfully.order.api.costumer.dto.CreateCostumerDto;
 import com.switchfully.order.api.item.dto.CreateItemDto;
 import com.switchfully.order.api.item.dto.ItemDto;
+import com.switchfully.order.api.order.OrderReportDto;
 import com.switchfully.order.api.order.orderDto.CreateItemGroupDto;
 import com.switchfully.order.api.order.orderDto.ItemGroupDto;
 import com.switchfully.order.api.order.orderDto.CreateOrderDto;
@@ -14,6 +15,7 @@ import com.switchfully.order.domain.order.ItemGroup;
 import com.switchfully.order.domain.order.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -83,4 +85,13 @@ public class DtoMapper {
                 .setItemGroups(order.getItemGroups()
                         .stream().map(this::itemGroupToDto).collect(Collectors.toList()));
     }
+
+    public OrderReportDto orderReportToDto(List<Order> orderList, double totalSpent) {
+        return new OrderReportDto()
+                .setTotalSpent(totalSpent)
+                .setOrderList(orderList.stream()
+                        .map(this::orderToOrderDto)
+                        .collect(Collectors.toList()));
+    }
+
 }

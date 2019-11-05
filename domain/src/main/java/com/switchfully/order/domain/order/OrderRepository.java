@@ -21,7 +21,7 @@ public class OrderRepository {
         return orderRepository;
     }
 
-    public List<Order> getOrderFromCostumer(String costumerId){
+    public List<Order> getOrdersFromCostumer(String costumerId){
         return orderRepository.values().stream()
                 .filter(order -> order.getCostumerId().equals(costumerId))
                 .collect(Collectors.toList());
