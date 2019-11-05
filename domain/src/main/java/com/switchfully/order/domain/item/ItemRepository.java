@@ -16,6 +16,10 @@ public class ItemRepository {
         }
     }
 
+    public Item getItemById(String itemId) {
+        return itemRepository.stream().filter(item -> item.getItemId().equals(itemId)).findFirst().get();
+    }
+
     private boolean isIn(Item item) {
         return itemRepository.contains(item);
     }

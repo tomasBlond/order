@@ -6,27 +6,15 @@ import java.util.List;
 public class Order {
     private String costumerId;
     private double price;
-    private ItemGroupRepository itemGroupRepository;
-    private List<ItemGroup> itemGroups = new ArrayList<>();
+    private List<ItemGroup> itemGroups;
 
-    public Order(String costumerId) {
+    public Order(String costumerId, List<ItemGroup> itemGroups) {
         this.costumerId = costumerId;
-        this.price = 0;
-    }
-
-    public ItemGroup saveOrderItem(ItemGroup itemGroup){
-        itemGroups.add(itemGroup);
-        return itemGroup;
+        this.itemGroups = itemGroups;
     }
 
     public List<ItemGroup> getItemGroups() {
         return itemGroups;
-    }
-
-    public double calculateOrderPrice(){
-        this.price = itemGroupRepository.getItemGroups().stream()
-                .mapToDouble(ItemGroup::calculatePrice).sum();
-        return price;
     }
 
     public String getCostumerId() {
@@ -37,7 +25,7 @@ public class Order {
         return price;
     }
 
-    public ItemGroupRepository getItemGroupRepository() {
-        return itemGroupRepository;
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
