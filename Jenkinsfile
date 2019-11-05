@@ -28,10 +28,5 @@ pipeline {
                 bat 'mvn clean test -pl :service'
             }
         }
-        stage('Infrastructure') {
-            steps {
-                bat 'mvn clean test -pl :infrastructure'
-            }
-        }
     }
 }
