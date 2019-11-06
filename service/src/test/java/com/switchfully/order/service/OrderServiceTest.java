@@ -9,15 +9,17 @@ import com.switchfully.order.domain.order.OrderRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
-
+@SpringBootTest(classes = {OrderService.class, OrderRepository.class, ItemRepository.class})
 class OrderServiceTest {
-    private OrderService orderService;
+    @Autowired private OrderService orderService;
     private Costumer costumer;
     private Item milk;
     private Item honing;

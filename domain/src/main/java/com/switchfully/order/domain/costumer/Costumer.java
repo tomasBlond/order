@@ -1,5 +1,6 @@
 package com.switchfully.order.domain.costumer;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Costumer {
@@ -41,5 +42,21 @@ public class Costumer {
 
     public int getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Costumer)) return false;
+        Costumer costumer = (Costumer) o;
+        return id.equals(costumer.id) &&
+                firstName.equals(costumer.firstName) &&
+                lastName.equals(costumer.lastName) &&
+                email.equals(costumer.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email);
     }
 }
