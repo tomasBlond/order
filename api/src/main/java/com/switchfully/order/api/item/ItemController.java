@@ -3,7 +3,7 @@ package com.switchfully.order.api.item;
 import com.switchfully.order.api.DtoMapper;
 import com.switchfully.order.api.item.dto.CreateItemDto;
 import com.switchfully.order.api.item.dto.ItemDto;
-import com.switchfully.order.service.ItemService;
+import com.switchfully.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/items")
 public class ItemController {
-    private ItemService itemService;
+    private OrderService orderService;
     private DtoMapper dtoMapper;
 
     @Autowired
-    public ItemController(ItemService itemService, DtoMapper dtoMapper) {
-        this.itemService = itemService;
+    public ItemController(OrderService itemService, DtoMapper dtoMapper) {
+        this.orderService = itemService;
         this.dtoMapper = dtoMapper;
     }
 
@@ -24,7 +24,7 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDto addItem(@RequestBody CreateItemDto createItemDto){
         var item = dtoMapper.createItemDtoToItem(createItemDto);
-        itemService.createItem(item);
+        orderService.createItem(item);
         return  dtoMapper.itemToDto(item);
     }
 }

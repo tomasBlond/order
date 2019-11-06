@@ -4,8 +4,9 @@ import com.switchfully.order.api.costumer.dto.CostumerDto;
 import com.switchfully.order.api.costumer.dto.CreateCostumerDto;
 import com.switchfully.order.api.item.dto.CreateItemDto;
 import com.switchfully.order.api.item.dto.ItemDto;
-import com.switchfully.order.api.order.itemGroupDtos.CreateItemGroupDto;
-import com.switchfully.order.api.order.itemGroupDtos.ItemGroupDto;
+import com.switchfully.order.api.order.OrderReportDto;
+import com.switchfully.order.api.order.orderDto.CreateItemGroupDto;
+import com.switchfully.order.api.order.orderDto.ItemGroupDto;
 import com.switchfully.order.api.order.orderDto.CreateOrderDto;
 import com.switchfully.order.api.order.orderDto.OrderDto;
 import com.switchfully.order.domain.costumer.Costumer;
@@ -14,21 +15,22 @@ import com.switchfully.order.domain.order.ItemGroup;
 import com.switchfully.order.domain.order.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class DtoMapper {
 
-    public CostumerDto costumerToDto(Costumer costumer){
-        CostumerDto myDto = new CostumerDto();
-        myDto.setId(costumer.getId());
-        myDto.setAddress(costumer.getAddress());
-        myDto.setEmail(costumer.getEmail());
-        myDto.setFirstName(costumer.getFirstName());
-        myDto.setLastName(costumer.getLastName());
-        myDto.setPhoneNumber(costumer.getPhoneNumber());
-        return myDto;
+    public CostumerDto costumerToDto(Costumer costumer) {
+        return new CostumerDto().setId(costumer.getId())
+                .setAddress(costumer.getAddress())
+                .setEmail(costumer.getEmail())
+                .setFirstName(costumer.getFirstName())
+                .setLastName(costumer.getLastName())
+                .setPhoneNumber(costumer.getPhoneNumber());
     }
 
-    public Costumer createCostumerDtoToCostumer(CreateCostumerDto createCostumerDto){
+    public Costumer createCostumerDtoToCostumer(CreateCostumerDto createCostumerDto) {
         return new Costumer(
                 createCostumerDto.getFirstName(),
                 createCostumerDto.getLastName(),
@@ -45,41 +47,51 @@ public class DtoMapper {
                 createItemDto.getStockAmount());
     }
 
-    public ItemDto itemToDto(Item item){
-        ItemDto myDto = new ItemDto();
-        myDto.setName(item.getName());
-        myDto.setDescription(item.getDescription());
-        myDto.setPrice(item.getPrice());
-        myDto.setStockAmount(item.getStockAmount());
-        return myDto;
+    public ItemDto itemToDto(Item item) {
+        return new ItemDto()
+                .setItemId(item.getItemId())
+                .setName(item.getName())
+                .setDescription(item.getDescription())
+                .setPrice(item.getPrice())
+                .setStockAmount(item.getStockAmount());
     }
 
     public ItemGroup createItemGroupDtoToItemGroup(CreateItemGroupDto createItemGroupDto) {
         return new ItemGroup(
-                createItemGroupDto.getItem(),
+                createItemGroupDto.getItemId(),
                 createItemGroupDto.getAmount());
     }
 
-    public ItemGroupDto itemGroupToDto(ItemGroup itemGroup){
-        ItemGroupDto myDto = new ItemGroupDto();
-        myDto.setAmount(itemGroup.getAmount());
-        myDto.setItem(itemGroup.getItem());
-        myDto.setShippingDate(itemGroup.getShippingDate());
-        myDto.setId(itemGroup.getId());
-        return myDto;
+    public ItemGroupDto itemGroupToDto(ItemGroup itemGroup) {
+        return new ItemGroupDto()
+                .setAmount(itemGroup.getAmount())
+                .setShippingDate(itemGroup.getShippingDate())
+                .setId(itemGroup.getItemId())
+                .setPrice(itemGroup.getPrice())
+                .setUnitPrice(itemGroup.getPrice()/itemGroup.getAmount());
     }
 
     public Order createOrderDtoToOrder(CreateOrderDto createOrderDto) {
         return new Order(
-                createOrderDto.getCostumer()
-        );
+                createOrderDto.getCostumerId(),
+                createOrderDto.getCreateItemGroups()
+                        .stream().map(this::createItemGroupDtoToItemGroup).collect(Collectors.toList()));
     }
 
-    public OrderDto orderToOrderDto(Order order){
-        OrderDto myDto = new OrderDto();
-        myDto.setCostumer(order.getCostumer());
-        myDto.setItemGroupRepository(order.getItemGroupRepository());
-        myDto.setPrice(order.getPrice());
-        return myDto;
+    public OrderDto orderToOrderDto(Order order) {
+        return new OrderDto()
+        .setCostumerId(order.getCostumerId())
+                .setTotalOrderPrice(order.getPrice())
+                .setItemGroups(order.getItemGroups()
+                        .stream().map(this::itemGroupToDto).collect(Collectors.toList()));
     }
+
+    public OrderReportDto orderReportToDto(List<Order> orderList, double totalSpent) {
+        return new OrderReportDto()
+                .setTotalSpent(totalSpent)
+                .setOrderList(orderList.stream()
+                        .map(this::orderToOrderDto)
+                        .collect(Collectors.toList()));
+    }
+
 }

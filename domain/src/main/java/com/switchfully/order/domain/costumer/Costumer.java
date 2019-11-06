@@ -11,7 +11,7 @@ public class Costumer {
     private int phoneNumber;
 
     public Costumer(String firstName, String lastName, String email, String address, int phoneNumber) {
-        this.id = UUID.randomUUID().toString();
+        this.id = lastName + firstName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

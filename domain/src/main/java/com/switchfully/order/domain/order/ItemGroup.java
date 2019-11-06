@@ -1,37 +1,35 @@
 package com.switchfully.order.domain.order;
 
-import com.switchfully.order.domain.item.Item;
-
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class ItemGroup {
-    private Item item;
-    private String id;
+    private String itemId;
     private int amount;
     private LocalDate shippingDate;
+    private double price;
 
-    public ItemGroup(Item item, int amount) {
-        this.item = item;
-        this.id = UUID.randomUUID().toString();
-        this.amount = amount;
-        if (item.getStockAmount() > amount){
-            this.shippingDate = LocalDate.now().plusDays(1);
-        } else {
-            this.shippingDate = LocalDate.now().plusDays(7);
+    public ItemGroup(String itemId, int amount) {
+        if (amount < 1){
+            throw new IllegalArgumentException("To place an order, amount must be bigger than 1");
         }
+        this.itemId = itemId;
+        this.amount = amount;
     }
 
-    public double calculatePrice(){
-        return item.getPrice() * amount;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public Item getItem() {
-        return item;
+    public void setShippingDate(LocalDate shippingDate) {
+        this.shippingDate = shippingDate;
     }
 
-    public String getId() {
-        return id;
+    public double getPrice() {
+        return price;
+    }
+
+    public String getItemId() {
+        return itemId;
     }
 
     public int getAmount() {

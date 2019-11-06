@@ -11,9 +11,19 @@ public class ItemRepository {
     public void save(Item item) {
         if (isIn(item)){
             throw new IllegalArgumentException("Item is already in");
-        } else {
-           itemRepository.add(item);
         }
+        itemRepository.add(item);
+    }
+
+    public Item getItemById(String itemId) {
+        if (itemIsIn(itemId)){
+            return itemRepository.stream().filter(item -> item.getItemId().equals(itemId)).findFirst().get();
+        }
+        throw new IllegalArgumentException("Item with id " + itemId + " not found");
+    }
+
+    private boolean itemIsIn(String itemId) {
+        return itemRepository.stream().anyMatch(item -> item.getItemId().equals(itemId));
     }
 
     private boolean isIn(Item item) {

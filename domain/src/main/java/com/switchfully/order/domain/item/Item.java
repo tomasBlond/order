@@ -1,25 +1,22 @@
 package com.switchfully.order.domain.item;
 
-import java.util.UUID;
-
-public class
-Item {
-    private String id;
+public class Item {
+    private String itemId;
     private String name;
     private String description;
     private double price;
     private int stockAmount;
 
     public Item(String name, String description, double price, int stockAmount) {
-        this.id = UUID.randomUUID().toString();
+        this.itemId = name;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockAmount = stockAmount;
     }
 
-    public String getId() {
-        return id;
+    public String getItemId() {
+        return itemId;
     }
 
     public String getName() {
@@ -36,5 +33,9 @@ Item {
 
     public int getStockAmount() {
         return stockAmount;
+    }
+
+    public void setStockAmount(int stockAmount) {
+        this.stockAmount = stockAmount;
     }
 }

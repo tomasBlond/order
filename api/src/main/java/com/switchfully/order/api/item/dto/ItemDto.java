@@ -1,10 +1,15 @@
 package com.switchfully.order.api.item.dto;
 
 public class ItemDto {
+    private String itemId;
     private String name;
     private String description;
     private double price;
     private int stockAmount;
+
+    public String getItemId() {
+        return itemId;
+    }
 
     public String getName() {
         return name;
@@ -39,6 +44,11 @@ public class ItemDto {
 
     public ItemDto setStockAmount(int stockAmount) {
         this.stockAmount = stockAmount;
+        return this;
+    }
+
+    public ItemDto setItemId(String itemId) {
+        this.itemId = itemId;
         return this;
     }
 }

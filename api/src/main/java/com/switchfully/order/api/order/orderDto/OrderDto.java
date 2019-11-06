@@ -1,37 +1,36 @@
 package com.switchfully.order.api.order.orderDto;
 
-import com.switchfully.order.domain.costumer.Costumer;
-import com.switchfully.order.domain.order.ItemGroupRepository;
+import java.util.List;
 
 public class OrderDto {
-    private Costumer costumer;
-    private double price;
-    private ItemGroupRepository itemGroupRepository;
+    private String costumerId;
+    private double totalOrderPrice;
+    private List<ItemGroupDto> itemGroups;
 
-    public Costumer getCostumer() {
-        return costumer;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public ItemGroupRepository getItemGroupRepository() {
-        return itemGroupRepository;
-    }
-
-    public OrderDto setCostumer(Costumer costumer) {
-        this.costumer = costumer;
+    public OrderDto setCostumerId(String costumerId) {
+        this.costumerId = costumerId;
         return this;
     }
 
-    public OrderDto setPrice(double price) {
-        this.price = price;
+    public OrderDto setTotalOrderPrice(double totalOrderPrice) {
+        this.totalOrderPrice = totalOrderPrice;
         return this;
     }
 
-    public OrderDto setItemGroupRepository(ItemGroupRepository itemGroupRepository) {
-        this.itemGroupRepository = itemGroupRepository;
+    public OrderDto setItemGroups(List<ItemGroupDto> itemGroups) {
+        this.itemGroups = itemGroups;
         return this;
+    }
+
+    public String getCostumerId() {
+        return costumerId;
+    }
+
+    public double getTotalOrderPrice() {
+        return totalOrderPrice;
+    }
+
+    public List<ItemGroupDto> getItemGroups() {
+        return itemGroups;
     }
 }

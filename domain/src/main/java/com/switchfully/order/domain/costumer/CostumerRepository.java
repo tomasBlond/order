@@ -13,6 +13,12 @@ public class CostumerRepository {
     }
 
     public void save(Costumer costumer) {
+        if (isIn(costumer)){
+            throw new IllegalArgumentException("Costumer already Exists");
+        }
         costumerRepository.add(costumer);
+    }
+    private boolean isIn(Costumer costumer) {
+        return costumerRepository.contains(costumer);
     }
 }

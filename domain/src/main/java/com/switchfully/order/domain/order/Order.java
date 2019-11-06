@@ -1,36 +1,41 @@
 package com.switchfully.order.domain.order;
 
-import com.switchfully.order.domain.costumer.Costumer;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Order {
-    private Costumer costumer;
+    private String orderID;
+    private String costumerId;
     private double price;
-    private ItemGroupRepository itemGroupRepository;
+    private List<ItemGroup> itemGroups;
 
-    public Order(Costumer costumer) {
-        this.costumer = costumer;
-        this.price = 0;
+    public Order(String costumerId, List<ItemGroup> itemGroups) {
+        this.costumerId = costumerId;
+        this.itemGroups = itemGroups;
+        this.orderID = createOrderId();
     }
 
-    public double calculateOrderPrice(){
-        this.price = itemGroupRepository.getItemGroups().stream()
-                .mapToDouble(ItemGroup::calculatePrice).sum();
-        return price;
+    private String createOrderId() {
+        return costumerId + UUID.randomUUID().toString().substring(0,5);
     }
 
-    public Costumer getCostumer() {
-        return costumer;
+    public List<ItemGroup> getItemGroups() {
+        return itemGroups;
+    }
+
+    public String getCostumerId() {
+        return costumerId;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public ItemGroupRepository getItemGroupRepository() {
-        return itemGroupRepository;
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
