@@ -46,7 +46,7 @@ class OrderServiceTest {
     }
 
     @Test
-    void whenPlaceOrder_thenItemStockChangewithAmountOrdered(){
+    void placeOrder_thenItemStockChangeWithAmountOrdered(){
         orderService.placeOrder(myOrder);
         Assertions.assertEquals(2, milk.getStockAmount());
         Assertions.assertEquals(-2, honing.getStockAmount());

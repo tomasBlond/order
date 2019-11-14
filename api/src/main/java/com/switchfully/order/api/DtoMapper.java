@@ -4,6 +4,7 @@ import com.switchfully.order.api.costumer.dto.CostumerDto;
 import com.switchfully.order.api.costumer.dto.CreateCostumerDto;
 import com.switchfully.order.api.item.dto.CreateItemDto;
 import com.switchfully.order.api.item.dto.ItemDto;
+import com.switchfully.order.api.item.dto.ItemStockIndicatorDto;
 import com.switchfully.order.api.order.OrderReportDto;
 import com.switchfully.order.api.order.orderDto.CreateItemGroupDto;
 import com.switchfully.order.api.order.orderDto.ItemGroupDto;
@@ -54,6 +55,14 @@ public class DtoMapper {
                 .setDescription(item.getDescription())
                 .setPrice(item.getPrice())
                 .setStockAmount(item.getStockAmount());
+    }
+
+    public ItemStockIndicatorDto itemToItemStockIndicatorDto(Item item){
+        return new ItemStockIndicatorDto()
+                .setItemId(item.getItemId())
+                .setName(item.getName())
+                .setStockAmount(item.getStockAmount())
+                .setStockIndicator(item.getStockIndicator());
     }
 
     public ItemGroup createItemGroupDtoToItemGroup(CreateItemGroupDto createItemGroupDto) {

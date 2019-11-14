@@ -2,7 +2,6 @@ package com.switchfully.order.service;
 
 import com.switchfully.order.domain.costumer.Costumer;
 import com.switchfully.order.domain.costumer.CostumerRepository;
-import com.switchfully.order.domain.item.ItemRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

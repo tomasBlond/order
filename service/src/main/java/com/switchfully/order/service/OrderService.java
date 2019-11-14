@@ -2,6 +2,7 @@ package com.switchfully.order.service;
 
 import com.switchfully.order.domain.item.Item;
 import com.switchfully.order.domain.item.ItemRepository;
+import com.switchfully.order.domain.item.StockIndicator;
 import com.switchfully.order.domain.order.ItemGroup;
 import com.switchfully.order.domain.order.Order;
 import com.switchfully.order.domain.order.OrderRepository;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderService {
@@ -75,6 +78,7 @@ public class OrderService {
     public double calculateTotalSpent(List<Order> orderList) {
         return orderList.stream().mapToDouble(Order::getPrice).sum();
     }
+
     public List<Order> getReport(String costumerId) {
         return orderRepository.getOrdersFromCostumer(costumerId);
     }
@@ -85,4 +89,22 @@ public class OrderService {
         return itemRepository;
     }
 
+    public List<Item> getItemsStockReport(String stockIndicator) {
+        List<Item> allItems = getItemRepository().getAll();
+        if (stockIndicator != null && !stockIndicator.isEmpty()){
+            return allItems = getItemsByStockIndicator(allItems, stockIndicator);
+        }
+        return allItems;
+    }
+
+    private List<Item> getItemsByStockIndicator(List<Item> allItems, String stockIndicator) {
+        if (stockIndicator.toUpperCase().equals(StockIndicator.STOCK_HIGH.toString()) ||
+                stockIndicator.toUpperCase().equals(StockIndicator.STOCK_MEDIUM.toString()) ||
+                stockIndicator.toUpperCase().equals(StockIndicator.STOCK_LOW.toString())){
+            return allItems.stream()
+                    .filter(item -> item.getStockIndicator().name().equals(stockIndicator))
+                    .collect(Collectors.toList());
+        }
+        throw new IllegalArgumentException("couldn't find items with this stock indicator");
+    }
 }
